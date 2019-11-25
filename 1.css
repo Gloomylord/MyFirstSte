@@ -1,12 +1,15 @@
+html{
+    height: 100%;
+    
+}
 .my{
     border-radius: 0px;
     border-color: black;
     background-color: limegreen;
     color: azure;
-    box-shadow: 3px 3px 0px black;
+    box-shadow: 2px 2px 6px ghostwhite;
 }
 .navbarsearch{
-
     border-radius: 30px;
 }
 .nobody{
@@ -14,10 +17,10 @@
 }
 .navbarmy{
     font-size: 30px;
+    color: azure !important;
 }
-.mymedia{
-position: absolute;
-right: 50px;    
+.navbarmy1{
+    font-size: 30px;
 }
 .imgmy{
     font-size: 60px; 
@@ -27,20 +30,99 @@ right: 50px;
     border-radius: 0px;
     box-shadow: 2px 2px 0px black;
 }
-.lefttable{
- position: absolute;
-    right: 60px;
-    top: 150px;
-}
+
 .bordermy{
     border: 3px solid black;
-    width: 30% ;
 }
 .myline{
-    
-    border-top: 2px solid blue;
-    color: aqua;
+    border-top: 2px solid #a0cbb3;
+    color: azure;
 }
 .cyka{
  color: red !important;
+}
+.mi{
+    background-image: url(1.jpg);
+background-size: cover;
+}
+.mil{
+    margin-top: 0px;
+}
+.bot{
+
+margin-bottom: 0px;
+}
+.mycolor{
+    color:azure !important;
+}
+.ci{
+font-size: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    background-color: aliceblue;
+    color: black;
+    margin: 0px !important;
+    
+}
+.forme{
+    border: 3px solid black;   
+}
+.ci1{
+        border-top: 0px solid black;
+    border-right: 0px solid black;
+}
+.ci2{
+     border-top: 0px solid black;
+    border-bottom: 0px solid black;
+    border-right: 0px solid black;
+    
+}
+.nav{
+    position: absolute;
+    left: 160px;
+}
+body{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.header{
+ flex-grow: 0;   
+}
+.main{
+    display: flex;
+    flex-direction: row;
+  flex-grow: 1; 
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.footer{
+  flex-grow: 0;  
+}
+.sure{
+    background-image: url(3.jpg);
+    background-size: cover;
+}
+.header1{
+   display: flex;
+flex-direction: row; 
+    justify-content: space-between;
+}
+.flex-element3{
+    margin-left: auto;
+}
+.flex-element1{
+    display: flex;
+    width: 500px;
+    flex-direction: row;
+}
+.squere{
+    border-radius: 0px;
+    border: 2px solid black;
+    
+}
+.text{
+    font-size: 20px;
 }
