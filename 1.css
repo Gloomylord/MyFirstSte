@@ -33,6 +33,7 @@ html{
 
 .bordermy{
     border: 3px solid black;
+    width: 400;
 }
 .myline{
     border-top: 2px solid #a0cbb3;
@@ -115,7 +116,7 @@ flex-direction: row;
 }
 .flex-element1{
     display: flex;
-    width: 500px;
+    width: 500px !important;
     flex-direction: row;
 }
 .squere{
@@ -125,4 +126,32 @@ flex-direction: row;
 }
 .text{
     font-size: 20px;
+}
+.bigger{
+    font-size: 100px;
+}
+.line2{
+    border: 2px solid black;
+}
+.flex-elementb{
+    align-self: flex-start;
+}
+.mimedia{
+    width: 640px;
+}
+.forme1{
+    display: flex;
+    flex-direction: column;
+}
+.botv{
+    border: 2px solid black;
+    padding: 0px;
+    font-size: 10px;
+    
+}
+#elem2{
+    padding-left: 13px !important;
+}
+#area{
+    width: 640px !important;
 }
