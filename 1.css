@@ -155,3 +155,21 @@ flex-direction: row;
 #area{
     width: 640px !important;
 }
+.divelementrow{
+    display: flex;
+    flex-direction: row;
+}
+.divelementcolumn{
+    display: flex;
+    flex-direction: column;
+    
+}
+.divelementalign{
+    align-items: flex-start;
+}
+.imgmy1{
+    font-size: 90px; 
+}
+.mywidth{
+    width: 640 !important;
+}
