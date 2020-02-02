@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ask {% if user %}
+        {{user.firstName}}
+        {% else %}
+        Some
+        {% endif %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/static/1.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+{% if user %}
+{% include "Cap.html" %}
+{% else %}
+{% include "Caplogout.html" %}
+{% endif %}
+<div class="main">
+    <div class="ml-2 mt-3 here" style="min-width: 30%;">
+        <div class="ml-5 off mre">
+            <div class="media mimedia pl-2 pr-3 forme1">
+                <div class="forme2">
+                    <div class="ml-3 mr-3 forme1">
+                        <img src="{{question.user.url}}"
+                             class="shadowimgblak align-self-start imgmy {%if question.user.url%}imgtitle bblack{%endif%} bigger "
+                             alt="&#9746;">
+                        <div class="btn-toolbar forme ml-2 flex-elementb miflex" role="toolbar"
+                             aria-label="Toolbar with button groups">
+                            <span id='q{{question.id}}' class="mt-1 ml-1 mb-1 ">{{question.IsLikeQuestionSum}}</span>
+                            <div class="btn-group-vertical  ml-2 mb-0 " role="group" aria-label="First group">
+                                <button type="button" id="q+{{question.id}}" onClick="postfetch(this)"
+                                        class="btn  mytoolbar ci ci1">&uArr;
+                                </button>
+                                <button type="button" id="q-{{question.id}}" onClick="postfetch(this)"
+                                        class="btn  mytoolbar ci ci2">&dArr;
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="mt-4 mb-4 text2">
+                            {{question.title}}
+                        </h4>
+                        <p class="text1">{{question.question}}</p>
+                        {%if question.tags%}
+                        Tags:
+                        {%endif%}
+                        {%for tag in question.tags%}
+                        <a class="ml-1" href="/search">{{tag.name}}</a>
+                        {%endfor%}
+                        <div id='messout{{question.id}}' class="disp red mb-3">Залогинтесь, чтобы оставить отзыв</div>
+                        <div id='mess{{question.id}}' class='disp red'>Вы уже поставили такой отзыв</div>
+                    </div>
+                </div>
+                <div class="m-3">Вопрос от: <a>{{question.user.firstName}}</a></div>
+            </div>
+
+            <hr class="line2" id='line'/>
+            <br>
+            {% for answer in answers %}
+            <div id='answer{{answer.id}}'
+                 class="shadowimgblak media bordermy pl-2 pr-3 pb-2 {%if answer.correct==1%}greeno{%endif%}">
+                <div class="ml-3 mr-3 mb-3">
+                    <img src="{{answer.user.dataValues.url}}"
+                         class="m-2 align-self-start imgmy {%if answer.user.dataValues.url%}imglow bblack{%endif%}"
+                         alt="&#9746;">
+                    <div class="btn-toolbar forme ml-3 miflex" role="toolbar" aria-label="Toolbar with button groups">
+                        <span id="a{{answer.id}}" class="mt-1 ml-1 mb-1">{{answer.IsLikeAnswerSum}}</span>
+                        <div class="btn-group-vertical  ml-2 mb-0 forbot" role="group" aria-label="First group">
+                            <button type="button" id="a+{{answer.id}}" onClick="postfetcha(this)"
+                                    class="btn  mytoolbar ci ci1">&uArr;
+                            </button>
+                            <button type="button" id="a-{{answer.id}}" onClick="postfetcha(this)"
+                                    class="btn  mytoolbar ci ci2">&dArr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="media-body forme1 ml-3">
+                    <h5 class="mt-3 mb-3 text1">{{answer.answer}}</h5>
+                    <p class="mt-4 mb-4 text2">Ответ от: {{answer.user.dataValues.firstName}}
+                        {{answer.user.dataValues.surname}}</p>
+                    <div class="text1 forme2">
+                        {%if user%}
+                        {%if user.email==question.user.email%}
+                        <button id='ac{{answer.id}}' type="button" class='btnsize' onclick='correct(this)'>
+                            {%if answer.correct==1%}
+                            &#9745;
+                            {%endif%}
+                        </button>
+                        {%endif%}
+                        {%endif%}
+                        <div id='acor{{answer.id}}' class="ml-2 centerv">
+                            {%if answer.correct==1%}
+                            <div id='correct{{answer.id}}'>Correct!</div>
+                            {%endif%}
+                        </div>
+                    </div>
+                    <div id='messaout{{answer.id}}' class='disp red'>Залогинтесь, чтобы оставить отзыв</div>
+                    <div id='messa{{answer.id}}' class='disp red'>Вы уже поставили такой отзыв</div>
+                </div>
+
+            </div>
+
+
+            <br>
+
+
+            {% endfor %}
+            <div id="pagin" class="mb-3"></div>
+            {%if user%}
+            {%if answer%}
+            <hr class="line2"/>
+            {%endif%}
+            {%endif%}
+            {%if user%}
+            <form id='form1' method="post" action="/answer/{{question.id}}">
+                <div class="form-group mb-4 ">
+                    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                    <textarea id="area" class="form-control squere flex-element1"
+                              placeholder="Enter your answer here..." rows="3" name="answer"></textarea>
+                </div>
+                <div class="mb-5" role="toolbar" aria-label="Toolbar with button groups">
+                    <button class="btn mr-2 mytoolbar" id="bot{{question.id}}" onclick="newanswer(this)">Answer</button>
+                </div>
+                <div id="spamErr" class="red mr-2 mb-3"></div>
+            </form>
+            {%endif%}
+        </div>
+    </div>
+    {% include "rigthblock.html"%}
+</div>
+<div class="sure footer">
+    <hr class="myline mil mb-4"/>
+    <hr class="myline bot mt-4"/>
+</div>
+<script>
+    async function correct(obj) {
+        let a;
+        if (document.getElementById('correct' + obj.id.slice(2)) || document.getElementById('acor' + obj.id.slice(2)).textContent == 'Correct') {
+            a = false;
+        } else {
+            a = true;
+        }
+        console.log(a);
+        let response = await fetch('/correct', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'X-CSRF-Token': '{{csrfToken}}'
+            },
+            body: JSON.stringify({id: obj.id.slice(2), correct: a})
+        });
+        let result = await response.json();
+        console.log(result);
+        if (result.correct) {
+            document.getElementById('answer' + obj.id.slice(2)).style.backgroundColor = '#ccff90';
+            document.getElementById('acor' + obj.id.slice(2)).innerHTML = 'Correct';
+            document.getElementById('ac' + obj.id.slice(2)).innerHTML = '&#9745;';
+        } else {
+            document.getElementById('answer' + obj.id.slice(2)).style.backgroundColor = 'white';
+            document.getElementById('acor' + obj.id.slice(2)).innerHTML = '';
+            document.getElementById('ac' + obj.id.slice(2)).textContent = '';
+        }
+    }
+
+    if ((({{nam}}) /5) <10){
+        let k = 1;
+        for (let i = 0; i < {{nam}};i += 5){
+            let s = document.createElement("button");
+            s.type = "button";
+            s.classList.add('btn');
+            s.classList.add('mr-2');
+            s.classList.add('mytoolbar');
+            let t = document.createElement("a");
+            t.href = `/answer/{{question.id}}?page=${k}`;
+            s.append(`${k}`);
+            t.append(s);
+            document.getElementById('pagin').append(t);
+            k++;
+        }
+    }
+
+    async function postfetch(obj) {
+        {%if user %}
+        let a;
+        if (obj.id.slice(1, 2) == '+') {
+            a = 1;
+        } else {
+            a = -1;
+        }
+        let response = await fetch('/article', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'X-CSRF-Token': '{{csrfToken}}'
+            },
+            body: JSON.stringify({id: obj.id.slice(2), like: obj.id.slice(1, 2)})
+        });
+        let result = await response.json();
+        console.log(a, result.lastGrade);
+        if (result.lastGrade == a) {
+            console.log('mess' + obj.id.slice(2));
+            let m = document.getElementById('mess' + obj.id.slice(2)).style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('mess' + obj.id.slice(2)).style.display = 'none';
+            }, 1000);
+        } else {
+            if (result.lastGrade) {
+                let likes = document.getElementById(obj.id.slice(0, 1) + obj.id.slice(2));
+                likes.textContent = +likes.textContent + 2 * a;
+            } else {
+                let likes = document.getElementById(obj.id.slice(0, 1) + obj.id.slice(2));
+                likes.textContent = +likes.textContent + a;
+            }
+        }
+        {%else%}
+        let m = document.getElementById('messout' + obj.id.slice(2)).style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('messout' + obj.id.slice(2)).style.display = 'none';
+        }, 1000);
+        {%endif%}
+    }
+
+    async function postfetcha(obj) {
+        {%if user %}
+        let a;
+        if (obj.id.slice(1, 2) == '+') {
+            a = 1;
+        } else {
+            a = -1;
+        }
+        let response = await fetch('/articlea', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({id: obj.id.slice(2), like: obj.id.slice(1, 2)})
+        });
+        let result = await response.json();
+        if (result.lastGrade == a) {
+            console.log('messa' + obj.id.slice(2));
+            let m = document.getElementById('messa' + obj.id.slice(2)).style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('messa' + obj.id.slice(2)).style.display = 'none';
+            }, 1000);
+        } else {
+            if (result.lastGrade) {
+                let likes = document.getElementById(obj.id.slice(0, 1) + obj.id.slice(2));
+                likes.textContent = +likes.textContent + 2 * a;
+            } else {
+                let likes = document.getElementById(obj.id.slice(0, 1) + obj.id.slice(2));
+                likes.textContent = +likes.textContent + a;
+            }
+        }
+        {%else%}
+        let m = document.getElementById('messaout' + obj.id.slice(2)).style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('messaout' + obj.id.slice(2)).style.display = 'none';
+        }, 1000);
+        {%endif%}
+    }
+
+    let socket = new WebSocket("ws://localhost:3000/echo");
+
+    socket.onopen = function (event) {
+        console.log("[open] Соединение установлено");
+        return event;
+    };
+
+
+    socket.onmessage = function (event) {
+        obj = JSON.parse(event.data);
+        console.log(obj);
+        let questionId = {{question.id}};
+        if (questionId == obj.questionId) {
+            console.log('сообщение получено');
+            let divMain = document.createElement('div');
+            divMain.className = 'shadowimgblak media bordermy pl-2 pr-3 pb-2 ';
+            let div1 = document.createElement('div');
+            div1.className = 'ml-3 mr-3 mb-3';
+            let img = document.createElement('img');
+            img.className = 'm-2 align-self-start imgmy imglow bblack';
+            img.alt = '☒';
+            img.src = obj.url;
+            div1.append(img);
+            let div2 = document.createElement('div');
+            div2.className = 'media-body forme1 ml-3';
+            let h5 = document.createElement('h5');
+            h5.className = 'mt-3 mb-3 text1';
+            h5.textContent = obj.answer;
+            let p = document.createElement('p');
+            p.className = "mt-4 mb-4 text2";
+            p.textContent = 'Ответ от: ' + obj.fullName;
+            div2.append(h5);
+            div2.append(p);
+            divMain.append(div1);
+            divMain.append(div2);
+            let m = document.getElementById('line');
+            m.after(divMain);
+            let br = document.createElement('br');
+            m.after(br);
+        }
+    };
+
+    function newanswer(obj) {
+        let a = {userId: '{{user.id}}'};
+        a.questionId = obj.id.slice(3);
+        socket.send(JSON.stringify(a));
+    }
+
+    function checked(e) {
+        e.preventDefault();
+        let err = document.getElementById('spamErr');
+        if (checkSpam(area.value)) {
+            err.textContent = 'Ответ содержит нецензурную лексику. Пожалуйста переформулируйте его.';
+        } else {
+            form1.submit();
+        }
+    }
+
+    function checkSpam(str) {
+        let massSpamWords = 'Viagra xxx sex пиздец хуй ебал'.toLowerCase().split(' ');
+        let lowerStr = str.toLowerCase();
+        let a = false;
+        for (let word of massSpamWords) {
+            if (lowerStr.includes(word)) {
+                a = true;
+            }
+        }
+        return a;
+    }
+
+    form1.onsubmit = checked;
+
+
+</script>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</html>
+

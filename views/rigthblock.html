@@ -1,0 +1,31 @@
+<div class=" fixed mt-4 mr-4 p-3 pl-5 where sticky" style="right: 30px; ">
+    <div class="flex-el">
+        <h4 class="">Popular Tags</h4>
+        {%if popUsers%}
+        <div class="flexel">
+            {%for tag in popTags%}
+            <a class="mr-1" href="/search?some={{tag.name}}">{{tag.name}}</a>
+            {%endfor%}
+
+            <br>
+
+        </div>
+
+        {%else%}
+        Пока нет тегов, но ты можешь это исправить)
+        {%endif%}
+    </div>
+    <div class="flex-el">
+        <h4 class="mt-4  width950">Best Members</h4>
+        {%if popUsers%}
+        <div class="flexel">
+            {%for user in popUsers%}
+            <a class="mr-1" href="/search">{{user.firstName}} {{user.surname}}</a> <br>
+            {%endfor%}
+        </div>
+
+        {% else %}
+        Пока нет ответов от пользователей(
+        {% endif %}
+    </div>
+</div>

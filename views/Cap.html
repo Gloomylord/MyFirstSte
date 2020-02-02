@@ -1,0 +1,27 @@
+<div class="mi header " style="top: 0px; ">
+    <hr class="myline mil"/>
+
+    <nav class="navbar navbar-expand-lg navbar-light light header1">
+        <div class="flex-element">
+            <a class="navbar-brand navbarmy" href="/newquestion">Ask Some</a>
+        </div>
+        <nav class="navbar navbar-light light mt-2 flex-element">
+            <form class="form-inline lol">
+                <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                <input class="form-control mr-2 navbarsearch" placeholder="Search" name="some">
+                <button class="btn btn-outline-success my-2 my-sm-0 my" type="submit">Ask!</button>
+            </form>
+        </nav>
+
+        <div class="media flex-element3">
+            <img src="{{user.url}}" class=" shadowimgwhite mr-3  imgmy {%if user.url%} imglow bwhite{%endif%} "
+                 alt="&#9746;">
+            <div class="media-body mycolor">
+                <h5 class="mt-4">{{user.firstName}}</h5>
+                <a href="/settings" class="mr-2">settings</a> <a href="/logout" onclick="clic()"> log out</a>
+            </div>
+        </div>
+
+    </nav>
+    <hr class="myline bot mt-4"/>
+</div>   

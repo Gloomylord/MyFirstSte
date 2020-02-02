@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AskPupkin</title>
+    <meta name="csrf-token" content="{{csrfToken}}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/static/1.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+{% include "Caplogout.html" %}
+
+
+<div class="main">
+    <div class="ml-2 off here">
+        <nav class="navbar navbar-expand-lg navbar-light light ml-5 mb-3 off">
+            <a class="navbar-brand navbarmy1 mt-2" href="#">Log in</a>
+        </nav>
+
+        <form class="ml-5 pl-3 mt-5 main1 off " action="/login" method="post">
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+            <div class="form-group mb-4 divelementcolumn">
+                <label class="mr-4 text mb-4" for="exampleFormControlInput1">Login</label>
+                <label class="mr-4 text mb-4 mt-2" for="exampleFormControlTextarea">Password</label>
+            </div>
+
+            <div class="form-group ml-5 mb-3 divelementcolumn divelementalign mywidth off">
+                <div>
+                    <input class="form-control squere mb-4" id="exampleFormControlInput1"
+                           name="email" placeholder="Enter your Login here">
+                </div>
+                <div>
+                    <input class="form-control squere mb-4"
+                           type='password' name="password" id="exampleFormControlTextarea" placeholder="*******">
+                </div>
+
+                <div>
+                    <button class="btn  mytoolbar mb-4" type="submit">Log in</button>
+                </div>
+                <a class="" href="/registration">Создать новый </a>
+            </div>
+            <script>
+            </script>
+        </form>
+        {% if err%}
+        <div class="ml-5 red">{{err}}</div>
+        {%endif%}
+    </div>
+
+
+    <br>
+    {% include "rigthblock.html"%}
+</div>
+
+<div class="sure footer">
+    <hr class="myline mil mb-4"/>
+    <hr class="myline bot mt-4"/>
+</div>
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+</html>

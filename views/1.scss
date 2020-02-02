@@ -1,0 +1,366 @@
+html{
+    height: 100%;
+
+}
+.my{
+    border-radius: 0px;
+    border-color: black;
+    background-color: limegreen;
+    color: azure !important;
+    box-shadow: 2px 2px 6px ghostwhite;
+}
+.navbarsearch{
+    border-radius: 30px;
+}
+.nobody{
+    color: black;
+}
+.shadowimgblak{
+    box-shadow: 4px 5px 5px black;
+}
+.shadowimgwhite{
+    box-shadow: 2px 3px 5px white;
+}
+.navbarmy{
+    font-size: 30px;
+    color: azure !important;
+}
+.navbarmy1{
+    font-size: 30px;
+}
+.imgmy{
+    font-size: 60px;
+}
+.forbot{
+    justify-content: space-between;
+}
+.mytoolbar{
+    border: 2px solid black;
+    border-radius: 0px;
+    box-shadow: 2px 2px 0px black;
+}
+
+.bordermy{
+    border: 3px solid black;
+    width: 400;
+}
+.myline{
+    border-top: 2px solid #a0cbb3;
+    color: azure;
+}
+.cyka{
+ color: red !important;
+}
+.mi{
+    background-image: url(1.jpg);
+    background-size: cover;
+}
+.mil{
+    margin-top: 0px;
+}
+.bot{
+
+margin-bottom: 0px;
+}
+.mycolor{
+    color:azure !important;
+}
+.ci{
+font-size: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    background-color: aliceblue;
+    color: black;
+    margin: 0px !important;
+
+}
+.miflex{
+    min-width: 60px;
+    max-width: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.forme{
+    border: 3px solid black;
+}
+.ci1{
+        border-top: 0px solid black;
+    border-right: 0px solid black;
+}
+.ci2{
+     border-top: 0px solid black;
+    border-bottom: 0px solid black;
+    border-right: 0px solid black;
+
+}
+.nav{
+    position: absolute;
+    left: 160px;
+}
+body{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.header{
+ flex-grow: 0;
+}
+.main1{
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    flex-wrap: wrap;
+}
+.mai{
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.main{
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.footer{
+  flex-grow: 0;
+}
+.sure{
+    background-image: url(3.jpg);
+    background-size: cover;
+}
+.header1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.flex-element3{
+    margin-left: auto;
+}
+.flex-element1{
+    display: flex;
+    width: 500px !important;
+    flex-direction: row;
+}
+.squere{
+    border-radius: 0px;
+    border: 2px solid black;
+
+}
+.text{
+    font-size: 20px;
+}
+.bigger{
+    font-size: 100px;
+}
+.line2{
+    border: 2px solid black;
+}
+.flex-element{
+    display: flex;
+}
+.flex-elementb{
+    align-self: flex-start;
+}
+.mimedia{
+    width: 100%;
+    max-width: 640px;
+}
+
+.setimg1{
+    max-height: 200px;
+    max-width: 200px;
+    min-height: 100px;
+    min-width: 100px;
+}
+.forme1{
+    display: flex;
+    flex-direction: column;
+}
+.centerv{
+    align-self: center;
+}
+.sticky{
+    position: sticky;
+    top:0;
+    align-self: start;
+}
+.qwer{
+    justify-content: space-between;
+}
+.forme2{
+    display: flex;
+    flex-direction: row;
+}
+.botv{
+    border: 2px solid black;
+    padding: 0px;
+    font-size: 10px;
+
+}
+#elem2{
+    padding-left: 13px !important;
+}
+#area{
+    width: 100% !important;
+    min-height: 50px;
+}
+.divelementrow{
+    width: 100%;
+}
+.xser{
+   height: 38px;
+}
+.disp{
+    display: none;
+
+}
+#exampleFormControlTextarea1{
+    min-height: 50px;
+    max-height: 400px;
+}
+.divelementcolumn{
+    display: flex;
+    flex-direction: column;
+
+}
+.divelementalign{
+    align-items: flex-start;
+}
+.imgmy1{
+    font-size: 90px;
+}
+.maxmi{
+        max-width:250px;
+}
+.mywidth{
+    width: 640 !important;
+}
+.red{
+    color: red;
+}
+.btn1{
+
+}
+.imglow{
+    max-height: 100px;
+    max-width: 100px;
+}
+.bwhite{
+    border: 1px solid white;
+}
+.bblack{
+    border: 1px solid black;
+}
+.imgtitle{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-height: 130px;
+    max-width: 130px;
+
+}
+.myw{
+    width: 150;
+
+}
+.btnsize{
+    height: 50px;
+    width: 50px;
+}
+.greeno{
+    background-color:#ccff90;
+}
+.setimg{
+    max-width: 150px;
+    max-height: 150px;
+}
+.bot{
+    padding:0px;
+    font-size:20px;
+    border: 1px solid black;
+    background-color: crimson;
+}
+@media (max-width: 970px) {
+    .where{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-content: space-between;
+        width: 100%;
+    }
+        .width950{
+        margin-top: 0px !important;
+    }
+    .main{
+        flex-direction: column;
+    }
+    .here{
+        width: 95%;
+    }
+}
+@media (max-width: 600px) {
+    .mi{
+        background-image: url(2.jpg);
+
+    }
+    .header1{
+        flex-direction: column;
+    }
+    .where{
+        display: none;
+
+    }
+    .lol{
+        flex-wrap: nowrap;
+    }
+    .navbarsearch{
+        min-width:inherit;
+    }
+    .flex-el{
+
+    }
+    .flexel{
+        display: flex;
+        flex-wrap: wrap;
+
+    }
+    .off{
+        margin: 0px !important;
+    }
+    .form-inline{
+        flex-wrap: nowrap;
+    }
+    .flex-element3{
+        margin-left: 0px;
+    }
+    .mre{
+        margin-left: 5px;
+    }
+    .text1{
+      font-size: 14px;
+    }
+    text2{
+        font-size: 17px;
+    }
+}
+#error{
+    border: 2px solid firebrick;
+    background-color: red;
+    border-radius: 5px;
+    padding: 3px;
+    display: none;
+
+}
+#success{
+    border: 2px solid darkgreen;
+    background-color: greenyellow;
+    border-radius: 5px;
+    padding: 3px;
+    display: none;
+}

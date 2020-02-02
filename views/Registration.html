@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+            <title>AskPupkin</title>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+            <link href="/static/1.css" rel="stylesheet" type="text/css"/>
+        </head>
+    
+<body>
+{% include "Caplogout.html" %}
+    
+<div class="main">
+<div class="ml-2">
+        {% if error %}
+    <div class="m-2 ml-5 red"><h4 class='ml-3'>{{error}}</h4></div>
+    {% endif %}
+    <nav class="navbar navbar-expand-lg navbar-light light ml-5">
+      <a class="navbar-brand navbarmy1">Registration</a>
+    </nav>
+    <form class="ml-5 pl-3 mt-5 main " method="post" action="/registration?_csrf={{csrfToken}}"
+          enctype="multipart/form-data">
+          <div class="form-group mb-4 divelementcolumn">
+            <label class="mr-4 text mb-4" for="exampleFormControlInput1">FirstName</label>
+              <label class="mr-4 text mb-4 mt-2" for="exampleFormControlInput7">Email</label>
+              <label class="mr-4 text mb-4 mt-2" for="exampleFormControlInput2">Surname</label>
+              <label class="mr-4 text mb-4 mt-2" for="exampleFormControlInput6">age</label>
+              <label class="mr-4 text mb-4 mt-2" for="exampleFormControlInput3" >Password</label>
+              <label class="mr-4 text mb-4 mt-2" for="exampleFormControlInput4" >Repeat Password</label>
+              <label class="mr-4 text mb-4 mt-2" for="exampleFormControlInput5">Upload avatar</label>
+          </div>
+
+    <div class="form-group ml-5 mb-3 divelementcolumn divelementalign mywidth">
+        <div class="divelementrow">
+            <input class="form-control xser squere mb-4" id="exampleFormControlInput1" placeholder="dr_pepper" name="firstName">
+        </div>
+        <div class="divelementrow">
+    <input class="form-control xser squere mb-4" id="exampleFormControlInput7" placeholder="dr.pepper@mail.ru" name="email">
+        </div>
+        <div  class="divelementrow">
+            <input class="form-control xser squere mb-4 " id="exampleFormControlInput2" placeholder="Dr.Peper" name="surname">
+        </div>
+        <div class="divelementrow" >
+            <input class="form-control xser squere mb-4" id="exampleFormControlInput6" placeholder="18" name="age">
+        </div>
+        <div class="divelementrow">
+            <input class="form-control xser squere mb-4" id="exampleFormControlInput3" placeholder="*****" type="password" name="password">
+        </div>
+        <div class="divelementrow">
+            <input class="form-control xser squere mb-4" id="exampleFormControlInput4" placeholder="*****" type="password" name="repeatPassword">
+        </div>
+        <div class="divelementrow mb-4">
+            <input  class="form-control xser squere myw" id="exampleFormControlInput5" placeholder="your image url" type='file' name="filedata">
+        </div>
+        <div>
+            <button class="btn  mytoolbar mb-4" type="submit">Регистрация</button>
+        </div>
+        </div>
+
+        </form>
+
+</div>
+   
+    
+
+
+        
+        <br>
+{% include "rigthblock.html"%}
+</div>
+
+    <div class="sure footer">
+        <hr class="myline mil mb-4"/>
+        <hr class="myline bot mt-4"/>
+    </div>
+
+</body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+</html>

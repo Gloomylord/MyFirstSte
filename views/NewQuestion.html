@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ask {% if user %}
+        {{user.firstName}}
+        {% else %}
+        Some
+        {% endif %} </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/static/1.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+{% if user %}
+{% include "Cap.html" %}
+{% else %}
+{% include "Caplogout.html" %}
+{% endif %}
+<div class="main">
+    <div class="ml-2">
+        <nav class="navbar navbar-expand-lg navbar-light light ml-5">
+            <a class="navbar-brand navbarmy1">New Question</a><a class="ml-3" href="/search">Перейти к вопросам</a>
+        </nav>
+        <form id='form1' class="ml-5 pl-3 mt-5 header" method="post">
+            <div class="form-group mb-4 flex-element1">
+                <label class="mr-4 text" for="exampleFormControlInput1">Title</label>
+                <input name="title" class="form-control squere" id="exampleFormControlInput1"
+                       placeholder="Your question" required="required">
+            </div>
+            <div class="form-group mb-4 flex-element1">
+                <label name="question" class="mr-4 text" for="exampleFormControlTextarea1">Text</label>
+                <textarea name="question" class="form-control squere" id="exampleFormControlTextarea1" rows="3"
+                          required="required"></textarea>
+            </div>
+            <div class="form-group mb-3 flex-element1">
+                <label class="mr-4 text" for="exampleFormControlInput2">Tags</label>
+                <input name="tags" class="form-control squere" id="exampleFormControlInput2" placeholder="add tags">
+                <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+            </div>
+            <div class="ml-3">
+                <button class="btn ml-5 mytoolbar mb-3">Ask!</button>
+            </div>
+            <div id="spamErr" class="red ml-5 pl-2"></div>
+        </form>
+
+    </div>
+
+    <br>
+    {% include "rigthblock.html"%}
+</div>
+
+<div class="sure footer">
+    <hr class="myline mil mb-4"/>
+    <hr class="myline bot mt-4"/>
+</div>
+<script>
+    function checked(e) {
+        e.preventDefault();
+
+        let err = document.getElementById('spamErr');
+        if (checkSpam(exampleFormControlInput1.value)) {
+            if (checkSpam(exampleFormControlTextarea1.value)) {
+                err.textContent = 'Введенные заголовок и вопрос содержат нецензурную лексику.';
+            } else {
+                err.textContent = 'Введенный вопрос содержит нецензурную лексику.';
+            }
+        } else {
+            if (checkSpam(exampleFormControlTextarea1.value)) {
+                err.textContent = 'Введенный заголовок вопроса содержит нецензурную лексику.';
+            } else {
+                if (checkSpam(exampleFormControlInput2.value)) {
+                    err.textContent = 'Теги содержат нецензурную лексику.';
+                } else {
+                    form1.submit();
+                }
+            }
+        }
+
+    }
+
+    function checkSpam(str) {
+        let massSpamWords = 'Viagra xxx sex пиздец хуй ебал'.toLowerCase().split(' ');
+        let lowerStr = str.toLowerCase();
+        let a = false;
+        for (let word of massSpamWords) {
+            if (lowerStr.includes(word)) {
+                a = true;
+            }
+        }
+        return a;
+    }
+
+    form1.onsubmit = checked;
+</script>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+</html>

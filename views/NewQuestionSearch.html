@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ask {% if user %}
+        {{user.firstName}}
+        {% else %}
+        Some
+        {% endif %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/static/1.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+{% if user %}
+{% include "Cap.html" %}
+{% else %}
+{% include "Caplogout.html" %}
+{% endif %}
+<div class="main">
+    <div class="ml-2 here" style="min-width: 40%">
+        <nav class="navbar navbar-expand-lg navbar-light light ml-5 off forme2 qwer">
+            <a class="navbar-brand navbarmy1" href="/search">Hot Question</a>
+            <a class="mt-2 mr-2" href="/newquestion">New Question +</a>
+        </nav>
+
+        <div class="ml-5 off">
+            {%if err==null%}
+            {% for question in questions %}
+            <div class="media bordermy pl-2 pr-3 " style="max-width: 700px;">
+                <div class="ml-3 mr-3">
+                    <img src="{{question.url}}"
+                         class="shadowimgblak align-self-start imgmy {%if question.url%}imgtitle bblack{%endif%}"
+                         alt="&#9746;">
+                    <div class="btn-toolbar forme ml-1 mb-2 miflex" role="toolbar"
+                         aria-label="Toolbar with button groups">
+                        <span id='q{{question.id}}' class="mt-1 ml-1 mb-1">{{question.IsLikeQuestionSum}}</span>
+                        <div class="btn-group-vertical  ml-2 mb-0 " role="group" aria-label="First group">
+                            <button type="button" id="q+{{question.id}}" onClick="postfetch(this)"
+                                    class="btn  mytoolbar ci ci1">&uArr;
+                            </button>
+                            <button type="button" id="q-{{question.id}}" onClick="postfetch(this)"
+                                    class="btn  mytoolbar ci ci2">&dArr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="media-body">
+                    <h5 class="mt-4 mb-4"><a href="/answer/{{question.id}}">{{question.title}}</a></h5>
+                    <p>{{question.question}}</p>
+                    <p><a class="mr-3" href="/answer/{{question.id}}">answers({{question.answerCount}})</a>
+                        {%if question.tags%}
+                        Tags:
+                        {%endif%}
+                        {%for tag in question.tags%}
+                        <a class="ml-1" href="/search?some={{tag.name}}">{{tag.name}}</a>
+                        {%endfor%}
+
+                    </p>
+                    <div id='mess{{question.id}}' class="disp red mb-3">Вы уже поставили такой отзыв</div>
+                    <div id='messout{{question.id}}' class="disp red mb-3">Залогинтесь, чтобы оставить отзыв</div>
+                </div>
+
+
+            </div>
+
+
+            <br>
+            {% endfor %}
+            {% else %}
+            <div id="error">Поизошла ошибка, при получении данных. Приносим свои извинения.</div>
+            {% endif %}
+
+
+            <div id="pagin" class="btn-toolbar mb-5" role="toolbar" aria-label="Toolbar with button groups">
+            </div>
+        </div>
+    </div>
+    {% include "rigthblock.html"%}
+</div>
+<div class="sure footer">
+    <hr class="myline mil mb-4"/>
+    <hr class="myline bot mt-4"/>
+</div>
+<script>
+    if ((({{nam}}) /8) <8)
+    {
+        let k = 1;
+        for (let i = 0; i < {{nam}};i += 8){
+            let s = document.createElement("button");
+            s.type = "button";
+            s.classList.add('btn');
+            s.classList.add('mr-2');
+            s.classList.add('mytoolbar');
+            let t = document.createElement("a");
+            t.href = `/search?page=${k}`;
+            s.append(`${k}`);
+            t.append(s);
+            document.getElementById('pagin').append(t);
+            k++;
+        }
+    }
+
+
+    async function postfetch(obj) {
+        {%if user %}
+        let a;
+        if (obj.id.slice(1, 2) == '+') {
+            a = 1;
+        } else {
+            a = -1;
+        }
+        let response = await fetch('/article', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'X-CSRF-Token': '{{csrfToken}}'
+            },
+            body: JSON.stringify({id: obj.id.slice(2), like: obj.id.slice(1, 2)})
+        });
+        let result = await response.json();
+        console.log(a, result.lastGrade);
+        if (result.lastGrade == a) {
+            console.log('mess' + obj.id.slice(2));
+            let m = document.getElementById('mess' + obj.id.slice(2)).style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('mess' + obj.id.slice(2)).style.display = 'none';
+            }, 1000);
+        } else {
+            if (result.lastGrade) {
+                let likes = document.getElementById(obj.id.slice(0, 1) + obj.id.slice(2));
+                likes.textContent = +likes.textContent + 2 * a;
+            } else {
+                let likes = document.getElementById(obj.id.slice(0, 1) + obj.id.slice(2));
+                likes.textContent = +likes.textContent + a;
+            }
+        }
+        {%else%}
+        let m = document.getElementById('messout' + obj.id.slice(2)).style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('messout' + obj.id.slice(2)).style.display = 'none';
+        }, 1000);
+        {%endif %}
+
+
+    }
+
+
+</script>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+</html>
